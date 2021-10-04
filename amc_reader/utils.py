@@ -5,6 +5,7 @@ from matplotlib import pyplot as plt
 
 from amc_reader.code_reader import Rectangle
 from amc_reader.code_reader import RelativeSpace
+from skimage import color
 
 LINE_THICKNESS = 4
 
@@ -51,4 +52,17 @@ def draw_rectangle(img, rectangle: Rectangle, color):
 def show_img(img):
     plt.imshow(img)
     plt.rcParams['figure.figsize'] = [200, 50]
+    plt.show()
+
+def show_img_with_blobs(img, blobs):
+    d_img = np.copy(img)
+    d_img = color.gray2rgb(d_img)
+
+    _, ax = plt.subplots()
+    ax.imshow(d_img)
+    for blob in blobs:
+        y, x, r = blob
+        c = plt.Circle((x, y), r, color='red', linewidth=2, fill=False)
+        ax.add_patch(c)
+
     plt.show()
