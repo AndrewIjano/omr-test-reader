@@ -1,5 +1,5 @@
 
-from amc_reader.utils import show_debug_image, show_image_with_draw, show_img
+from amc_reader.utils import show_debug_image
 from amc_reader.image_handler import ImageHandler
 from amc_reader.keypoints_detector import get_keypoints
 from amc_reader.code_reader import TestCodeReader, NuspCodeReader
