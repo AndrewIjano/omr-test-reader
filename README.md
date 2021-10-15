@@ -1,5 +1,8 @@
 # Multiple Choice Test Reader
 
+Access the full report, in Portuguese, [here](docs/report.pdf).
+
+
 ## Setup
 
 ```
