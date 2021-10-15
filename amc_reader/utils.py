@@ -3,8 +3,7 @@ import numpy as np
 
 from matplotlib import pyplot as plt
 
-from amc_reader.code_reader import Rectangle
-from amc_reader.code_reader import RelativeSpace
+from amc_reader.models import Rectangle, RelativeSpace
 from skimage import color
 
 LINE_THICKNESS = 4
@@ -24,6 +23,7 @@ def show_debug_image(image_filename, keypoints):
     draw_rectangle(img, relative_space.get_nusp_rectangle(), GREEN)
 
     show_img(img)
+
 
 def show_image_with_draw(img, keypoints):
     relative_space = RelativeSpace(keypoints)
@@ -53,6 +53,7 @@ def show_img(img):
     plt.imshow(img)
     plt.rcParams['figure.figsize'] = [200, 50]
     plt.show()
+
 
 def show_img_with_blobs(img, blobs):
     d_img = np.copy(img)

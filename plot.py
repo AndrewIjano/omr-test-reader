@@ -1,6 +1,9 @@
+'''
+    Plots graphs from the experiment
+'''
+
 import json
 import argparse
-from logging import error
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -40,8 +43,8 @@ path = args.path
 with (
     open(f'{path}/scans-simple.json') as simple_1_f,
     open(f'{path}/scans2-simple.json') as simple_2_f,
-    open(f'{path}/scans-doh2.json') as doh_1_f,
-    open(f'{path}/scans2-doh2.json') as doh_2_f
+    open(f'{path}/scans-doh.json') as doh_1_f,
+    open(f'{path}/scans2-doh.json') as doh_2_f
 ):
     x_pos = [1, 2]
 
@@ -55,7 +58,6 @@ with (
     ax1 = fig.add_subplot(spec[0, 0])
     ax2 = fig.add_subplot(spec[0, 1])
     ax3 = fig.add_subplot(spec[1, 0])
-    # fig, ax = plt.subplots()
 
     simple_success_counts = [
         simple_1_data['success_count'], simple_2_data['success_count']]
@@ -78,16 +80,7 @@ with (
 
     ax1.legend()
 
-    # ax1.bar_label(rects1, padding=3)
-    # ax1.bar_label(rects2, padding=3)
-
-    # Save the figure and show
     plt.tight_layout()
-
-    # plt.savefig('data/success.png')
-    # plt.show()
-
-    # fig, xa = plt.subplots()
 
     simple_times = [simple_1_data['time_mean'], simple_2_data['time_mean']]
     simple_times_stdev = [simple_1_data['time_stdev'],
@@ -109,14 +102,8 @@ with (
     ax2.set_xticks(x)
     ax2.set_xticklabels(labels)
     ax2.yaxis.grid(True)
-    # plt.savefig('data/times.png')
 
     ax2.legend()
-
-    # ax2.bar_label(time_means_simple, padding=3)
-    # ax2.bar_label(time_means_doh, padding=3)
-
-    # fig, ax = plt.subplots()
 
     simple_time_pixels = [simple_1_data['time_pixels_mean'],
                           simple_2_data['time_pixels_mean']]
@@ -144,12 +131,7 @@ with (
 
     ax3.legend()
 
-    # ax3.bar_label(time_pixel_means_simple, padding=3)
-    # ax3.bar_label(time_pixel_means_doh, padding=3)
-
-    # Save the figure and show
     plt.tight_layout()
-    # plt.savefig('data/times_pixels.png')
 
-    plt.savefig('bar_plot_with_error_bars.png')
+    plt.savefig('plot.png')
     plt.show()

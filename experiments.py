@@ -1,5 +1,9 @@
-from amc_reader.image_handler import ImageHandler
-from amc_reader.test_reader import TestReader
+'''
+    Makes the experiment for a given dataset and detector
+'''
+
+from amc_reader.image_handler import read_image
+from amc_reader import test_reader 
 
 import os
 import argparse
@@ -8,7 +12,7 @@ import time
 
 
 def is_read_test_successful(test_image_filename, detector_type):
-    test_code, _ = TestReader.read_test(test_image_filename, detector_type)
+    test_code, _ = test_reader.read_test(test_image_filename, detector_type)
     return test_code.is_code_valid
 
 
@@ -21,7 +25,7 @@ def get_args():
 
 
 def get_pixels_from_image(img_path):
-    img = ImageHandler.read_image(img_path)
+    img = read_image(img_path)
     x, y, _ = img.shape
     return x*y
 
