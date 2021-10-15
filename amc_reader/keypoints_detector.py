@@ -5,7 +5,7 @@ from skimage.feature import blob_doh
 KEYPOINT_RADIUS_TO_TEST_AREA_SQRT_RATIO = 0.00725
 
 
-def get_keypoints(img, detector_type='thresholding'):
+def get_keypoints(img, detector_type='simple'):
     detect_keypoints = get_detector(detector_type)
 
     keypoints = detect_keypoints(img)
@@ -20,12 +20,12 @@ def get_keypoints(img, detector_type='thresholding'):
 
 def get_detector(detector_type):
     return {
-        'thresholding': thresholding_blob_detector,
-        'log': log_blob_detector,
+        'simple': simple_blob_detector,
+        'doh': doh_blob_detector,
     }[detector_type]
 
 
-def thresholding_blob_detector(img):
+def simple_blob_detector(img):
     params = cv2.SimpleBlobDetector_Params()
 
     params.filterByArea = True
@@ -38,13 +38,13 @@ def thresholding_blob_detector(img):
     params.maxThreshold = 60
 
     params.filterByCircularity = True
-    params.minCircularity = 0.87
+    params.minCircularity = 0.8
 
     params.filterByConvexity = True
-    params.minConvexity = 0.85
+    params.minConvexity = 0.8
 
     params.filterByInertia = True
-    params.minInertiaRatio = 0.01
+    params.minInertiaRatio = 0.8
 
     detector = cv2.SimpleBlobDetector_create(params)
 
@@ -53,7 +53,7 @@ def thresholding_blob_detector(img):
     return np.array([k.pt for k in cv2_keypoints]).astype(int)
 
 
-def log_blob_detector(img):
+def doh_blob_detector(img):
     r = get_expect_keypoint_radius(img)
     blobs = blob_doh(img, min_sigma=r - r/8,
                          max_sigma=r + r/2, num_sigma=5, threshold=0.06)

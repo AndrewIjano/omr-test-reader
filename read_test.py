@@ -17,13 +17,13 @@ def show_result(test_code: TestCode, nusp_code: str):
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("test_image_filename", help="test image filename")
-    parser.add_argument("detector_type", choices=["thresholding", "log"])
-    parser.add_argument("--debug", action="store_true")
+    parser.add_argument("--detector", choices=["simple", "doh"], default="simple", help="method used to detect keypoints")
+    parser.add_argument("--debug", action="store_true", help="show debug info")
     return parser.parse_args()
 
 
 if __name__ == '__main__':
     args = get_args()
     test_code, nusp_code = TestReader.read_test(
-        args.test_image_filename, args.detector_type, debug=args.debug)
+        args.test_image_filename, args.detector, debug=args.debug)
     show_result(test_code, nusp_code)
